@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route, NavLink } from "react-router-dom";
-import Jokes from "../components/Jokes";
-import Login from "../components/Login";
-import Register from "../components/Register";
+import Jokes from "./components/Jokes";
+import Login from "./components/Login";
+import Register from "./components/Register";
 class App extends Component {
   constructor(props) {
     super(props);

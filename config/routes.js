@@ -59,7 +59,7 @@ function login(req, res) {
         if (user && bcrypt.compareSync(creds.password, user.password)) {
           //generate token
           const token = generateToken(creds);
-          res.status(200).json(token);
+          res.status(200).json({ token });
         } else {
           res.status(401).json({ message: "Access hella denied" });
         }
