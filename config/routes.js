@@ -1,14 +1,31 @@
+require("dotenv").config();
+
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { authenticate } = require("./middlewares");
 const db = require("../database/dbConfig");
+const secret = require("../_secrets/keys");
 
 module.exports = server => {
   server.post("/api/register", register);
   server.post("/api/login", login);
   server.get("/api/jokes", authenticate, getJokes);
 };
+
+function generateToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username
+  };
+
+  const secret = process.env.JWT_SECRET;
+  const options = {
+    expiresIn: "10m"
+  };
+
+  return jwt.sign(payload, secret, options);
+}
 
 function register(req, res) {
   // implement user registration
@@ -32,6 +49,24 @@ function register(req, res) {
 
 function login(req, res) {
   // implement user login
+  const creds = req.body;
+
+  if (creds.username && creds.password) {
+    db("users")
+      .where({ username: creds.username })
+      .first()
+      .then(user => {
+        if (user && bcrypt.compareSync(creds.password, user.password)) {
+          //generate token
+          const token = generateToken(creds);
+          res.status(200).json(token);
+        } else {
+          res.status(401).json({ message: "Access hella denied" });
+        }
+      });
+  } else {
+    res.status(400).json({ message: "Please fill out all fields." });
+  }
 }
 
 function getJokes(req, res) {
