@@ -4,11 +4,8 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Jokes from "./components/Jokes";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Home from "./components/Home";
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="App">
@@ -19,6 +16,7 @@ class App extends Component {
         </nav>
         <section>
           <Switch>
+            <Route exact path="/" component={Home} />
             <Route path="/signin" component={Login} />
             <Route path="/signup" component={Register} />
             <Route path="/jokes" component={Jokes} />
