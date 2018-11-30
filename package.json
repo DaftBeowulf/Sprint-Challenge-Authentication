@@ -2,9 +2,9 @@
   "name": "auth-challenge",
   "version": "1.0.0",
   "description": "Authentication Sprint Challenge",
-  "main": "index.js",
+  "main": "serverIndex.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
