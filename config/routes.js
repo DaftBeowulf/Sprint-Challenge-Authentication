@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { authenticate } = require("./middlewares");
 const db = require("../database/dbConfig");
-const secret = require("../_secrets/keys");
+const jwtKey = require("../_secrets/keys").jwtKey;
 
 module.exports = server => {
   server.post("/api/register", register);
@@ -19,7 +19,7 @@ function generateToken(user) {
     username: user.username
   };
 
-  const secret = process.env.JWT_SECRET;
+  const secret = jwtKey;
   const options = {
     expiresIn: "10m"
   };
@@ -72,7 +72,8 @@ function login(req, res) {
 function getJokes(req, res) {
   axios
     .get(
-      "https://08ad1pao69.execute-api.us-east-1.amazonaws.com/dev/random_ten"
+      // "https://08ad1pao69.execute-api.us-east-1.amazonaws.com/dev/random_ten"
+      "https://safe-falls-22549.herokuapp.com/random_ten"
     )
     .then(response => {
       res.status(200).json(response.data);
