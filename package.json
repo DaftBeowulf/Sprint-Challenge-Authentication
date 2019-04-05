@@ -4,7 +4,7 @@
   "description": "Authentication Sprint Challenge",
   "main": "serverIndex.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon serverIndex.js"
   },
   "repository": {
     "type": "git",

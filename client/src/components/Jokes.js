@@ -51,9 +51,6 @@ export default class Jokes extends React.Component {
   render() {
     return (
       <div className="joke-list-wrapper">
-        <button type="submit" onClick={this.logout}>
-          Logout
-        </button>
         <h4>We Got Jokes</h4>
         {this.state.jokes.map(joke => (
           <div className="joke" key={joke.id}>
